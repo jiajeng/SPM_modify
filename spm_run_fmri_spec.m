@@ -28,12 +28,22 @@ cd(d);
 %-Ask about overwriting files from previous analyses
 %--------------------------------------------------------------------------
 if exist(fullfile(pwd,'SPM.mat'),'file')
-    str = {'Current directory contains existing SPM file:',...
-           'Continuing will overwrite existing file!'};
-    if spm_input(str,1,'bd','stop|continue',[1,0],1,mfilename)
-        fprintf('%-40s: %30s\n\n',...
-            'Abort...   (existing SPM file)',spm('time'));
-        out = []; return
+    try
+        ow = load(fullfile(cwd,'overwrite'));
+        ow  = ow.ow;
+    catch
+        ow = nan;
+    end
+    if ~isnan(ow)
+        if ~ow, return;end
+    else
+        str = {'Current directory contains existing SPM file:',...
+               'Continuing will overwrite existing file!'};
+        if spm_input(str,1,'bd','stop|continue',[1,0],0,mfilename);
+            fprintf('%-40s: %30s\n\n',...
+                'Abort...   (existing SPM file)',spm('time'));
+            out = []; return
+        end
     end
 end
 
