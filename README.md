@@ -1,7 +1,8 @@
 # SPM_modify
 ### spm_contrast.m
 change contrast save filename --> filename = contrast name   
-e.x. con_0001.nii --> con_<conName>.nii
+e.x. con_0001.nii --> con_[conName].nii   
+&nsbp;&nsbp;&nsbp;&nsbp;&nsbp; spmT_0001.nii --> spmT_[conName].nii
 
 ### spm_run_factorial_design.m
 aim to overwrite SPM.mat automatically
