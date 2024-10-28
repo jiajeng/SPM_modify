@@ -337,6 +337,10 @@ text(0.5,0.7, txt,'FontSize',16,...
     'FontWeight','Bold','HorizontalAlignment','center','Parent',ax);
 
 Q = inv(VF.mat\spm_matrix(x(:)')*VG.mat);
+fname = split(VF.fname,'.');
+fname = [fname{1},'.mat'];
+affine = Q;
+save(fname,"affine");
 text(0,0.5, sprintf('X1 = %0.3f*X %+0.3f*Y %+0.3f*Z %+0.3f',Q(1,:)),'Parent',ax);
 text(0,0.3, sprintf('Y1 = %0.3f*X %+0.3f*Y %+0.3f*Z %+0.3f',Q(2,:)),'Parent',ax);
 text(0,0.1, sprintf('Z1 = %0.3f*X %+0.3f*Y %+0.3f*Z %+0.3f',Q(3,:)),'Parent',ax);
